@@ -1,5 +1,5 @@
 import paramiko
-
+import time
 
 class Client:
     def __init__(self,host,user,password):
@@ -27,7 +27,7 @@ class Client:
 
     def send_command(self,cmd):
         try:
-            stdin, stdout, stderr = sshSession.exec_command(command)
+            stdin, stdout, stderr = self.session.exec_command(cmd)
             # Wait for command to finish (may take a while for long commands)
             while not stdout.channel.exit_status_ready() or not stderr.channel.exit_status_ready():
                 time.sleep(1)
@@ -52,8 +52,8 @@ class Client:
 def botNetCommand(command):
     for client in botNet:
         out, err = client.send_command(command)
-        print '[*] Output from ' + client.host
-        print '[+] ' + out
+        print('[*] Output from ' + client.host)
+        print('[+] ' + out)
 
 
 def addClient(host,user,password):

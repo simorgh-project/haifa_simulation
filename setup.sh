@@ -8,3 +8,6 @@ source venv/bin/active
 
 # Install selenium
 pip install -U selenium
+
+# Install paramiko
+pip install -U paramiko

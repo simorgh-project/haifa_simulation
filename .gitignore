@@ -1,4 +1,4 @@
-chromelenium/.idea
-chromelenium/venv
+.idea
+venv
 chromelenium/screenshot.png
 .vscode
