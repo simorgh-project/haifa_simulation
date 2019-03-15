@@ -8,8 +8,8 @@ if __name__ == '__main__':
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--window-size=1920,1080")
 
-    driver = webdriver.Chrome('./chromedriver', chrome_options=chrome_options)  # Optional argument, if not specified will search path.
-    driver.get('http://www.google.com/xhtml')
+    driver = webdriver.Chrome('./chrome_version_73/mac/chromedriver', chrome_options=chrome_options)  # Optional argument, if not specified will search path.
+    driver.get('https://www.google.com')
 
     # Let the user actually see something!
     # time.sleep(5)
