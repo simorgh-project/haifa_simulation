@@ -2,3 +2,4 @@
 venv
 chromelenium/screenshot.png
 .vscode
+test.py
