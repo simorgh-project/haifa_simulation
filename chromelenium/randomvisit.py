@@ -15,11 +15,20 @@ def read_urls(file_path):
 
 def random_visit(url):
     for count in range(10):
-        driver.get("http://"+url)
+        if count == 0:
+            driver.get("http://"+url)
+        else:
+            print(driver.current_url)
+            driver.get(driver.current_url)
+
         next_urls = []
 
         for link in driver.find_elements_by_xpath("//*[@href]"):
-            next_urls.append(link.get_attribute('href'))
+            hyperlink = link.get_attribute('href')
+            next_urls.append(hyperlink)
+
+        if len(next_urls) == 0:
+            continue
 
         driver.get(random.choice(next_urls))
 
@@ -43,6 +52,7 @@ if __name__ == "__main__":
     driver.implicitly_wait(5)
 
     for url in urls:
+        print(url)
         random_visit(url)
 
     driver.quit()
