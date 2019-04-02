@@ -1,5 +1,7 @@
 import argparse
 import random
+import time
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -13,10 +15,19 @@ def read_urls(file_path):
     return url_list
 
 
-def random_visit(url):
+def random_visit(_url):
+    timestamp = int(time.time())
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--ssl-key-log-file=./ssl/"+_url+"_ssl_" + str(timestamp))
+    driver = webdriver.Chrome(args.driver, options=chrome_options)
+    # driver.maximize_window()
+    driver.implicitly_wait(5)
+
     for count in range(10):
         if count == 0:
-            driver.get("http://"+url)
+            driver.get("http://"+_url)
         else:
             print(driver.current_url)
             driver.get(driver.current_url)
@@ -32,6 +43,8 @@ def random_visit(url):
 
         driver.get(random.choice(next_urls))
 
+    driver.quit()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -41,18 +54,12 @@ if __name__ == "__main__":
     # Parse the args
     args = parser.parse_args()
 
+    # Create the ssl dir if not exists
+    if not os.path.isdir("./ssl"):
+        os.mkdir("./ssl")
+
+    # Visit urls from the input file
     urls = read_urls(args.file)
-
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--window-size=1920,1080")
-
-    driver = webdriver.Chrome(args.driver, options=chrome_options)
-    # driver.maximize_window()
-    driver.implicitly_wait(5)
-
     for url in urls:
         print(url)
         random_visit(url)
-
-    driver.quit()
