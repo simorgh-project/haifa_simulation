@@ -3,3 +3,7 @@ venv
 chromelenium/screenshot.png
 .vscode
 chromelenium/test.py
+Restful/target
+*.DS_Store
+*.iml
+chromelenium/urls.txt
