@@ -52,10 +52,11 @@ def main():
 
 
 if __name__ == '__main__':
-
+#god help 
         try:
                 t = round(time.time())
                 main()
         except:
                 print "Finished with: %s seconds" % (round(time.time() - t))
                 sys.exit()
+                
