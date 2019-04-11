@@ -5,6 +5,10 @@ import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from scapy.all import *
+#import threading
+from multiprocessing import Process
+
+pkts = []
 
 
 # Read urls from a txt file
@@ -16,36 +20,36 @@ def read_urls(file_path):
     return url_list
 
 
-pkts = []
-iter = 0
-pcapnum = 0
 
 
 def makecap(x):
+    #print "MAKEE"
     global pkts
-    global iter
-    global pcapnum
     pkts.append(x)
-    iter += 1
-    if iter == 500:
-        pcapnum += 1
-        pname = "./pcaps/" + str(url) + "_pcap_%d.pcap" % timestamp
-        wrpcap(pname, pkts)
-        pkts = []
-        iter = 0
+    #print str(x)
+
+def start_capture(u):
+    print "START"
+    sniff(prn=makecap, timeout=5)
+    print "done with sniff"
+    stop_capture(u)
 
 
-def start_capture():
-    global iter
-    iter = 0
-    while 1:
-        sniff(prn=makecap)
-
-
-def stop_capture():
-    global iter
+def stop_capture(u):
+    print "STOP"
     iter = 500
+    if iter == 500:
+        print (u)
+        re.sub('[^A-Za-z0-9]+','',u)
+        print (u)
+        pname = "./pcaps/" + str(url) + "url=" + u[10:19] + "_pcap_%d.pcap" % timestamp
+        wrpcap(pname, pkts)
+        print "done = " + str(pname)
 
+def rst_pkts():
+    global pkts
+    print "reset packets"
+    pkts=[]
 
 def random_visit(_url):
     chrome_options = Options()
@@ -62,9 +66,20 @@ def random_visit(_url):
             driver.get("http://" + _url)
         else:
             print(driver.current_url)
-            start_capture()
-            driver.get(driver.current_url)
-            stop_capture()  # pcap is created and saved
+
+            t1 = Process(target=start_capture, args=(str(driver.current_url),))
+
+            t2 = Process(target=driver.get,args=(driver.current_url,))
+            t2.start()
+            t1.start()
+
+            #start_capture()
+            #driver.get(driver.current_url)
+            print "back"
+            #time.sleep(2)
+            t2.join()
+            t1.join()
+            print "thats a wrap"
 
         next_urls = []
 
@@ -94,13 +109,14 @@ if __name__ == "__main__":
         os.mkdir("./ssl")
     if not os.path.isdir("./pcaps"):
         os.mkdir("./pcaps")
-        
+
     global url
     global timestamp
-    
+
     # Visit urls from the input file
     urls = read_urls(args.file)
     for url in urls:
         timestamp = int(time.time())
         print(url)
         random_visit(url)
+        rst_pkts()
