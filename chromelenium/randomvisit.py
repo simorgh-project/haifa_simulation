@@ -29,14 +29,14 @@ def makecap(x):
     #print str(x)
 
 def start_capture(u):
-    print "START"
+    #print "START"
     sniff(prn=makecap, timeout=5)
-    print "done with sniff"
+    #print "done with sniff"
     stop_capture(u)
 
 
 def stop_capture(u):
-    print "STOP"
+    print ("STOP")
     iter = 500
     if iter == 500:
         print (u)
@@ -48,7 +48,7 @@ def stop_capture(u):
 
 def rst_pkts():
     global pkts
-    print "reset packets"
+    print ("reset packets")
     pkts=[]
 
 def random_visit(_url):
