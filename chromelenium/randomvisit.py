@@ -75,7 +75,7 @@ def random_visit(_url):
 
             #start_capture()
             #driver.get(driver.current_url)
-            print "back"
+            print ("back")
             #time.sleep(2)
             t2.join()
             t1.join()
