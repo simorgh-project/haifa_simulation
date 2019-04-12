@@ -23,15 +23,15 @@ def read_urls(file_path):
 
 
 def makecap(x):
-    #print "MAKEE"
+    print ("MAKEE")
     global pkts
     pkts.append(x)
-    #print str(x)
+    #print (str(x))
 
 def start_capture(u):
-    #print "START"
+    print ("START")
     sniff(prn=makecap, timeout=5)
-    #print "done with sniff"
+    print ("done with sniff")
     stop_capture(u)
 
 
