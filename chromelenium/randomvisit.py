@@ -44,7 +44,7 @@ def stop_capture(u):
         print (u)
         pname = "./pcaps/" + str(url) + "url=" + u[10:19] + "_pcap_%d.pcap" % timestamp
         wrpcap(pname, pkts)
-        print "done = " + str(pname)
+        print ("done = " + str(pname))
 
 def rst_pkts():
     global pkts
