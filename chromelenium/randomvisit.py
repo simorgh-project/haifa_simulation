@@ -79,7 +79,7 @@ def random_visit(_url):
             #time.sleep(2)
             t2.join()
             t1.join()
-            print "thats a wrap"
+            print ("thats a wrap")
 
         next_urls = []
 
