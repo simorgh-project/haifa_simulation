@@ -25,7 +25,7 @@ def start_attack():
                 #        ip_adress = packet[1][DNSRR].rdata
                 #except:
                 #        ip_adress = sys.argv[1]
-                print ip_adress
+                #print ip_adress
                 s=0 #sucessful trials 
                 f=0 #failed trials
                 while 1:
