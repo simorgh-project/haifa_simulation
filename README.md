@@ -6,3 +6,5 @@ sudo python3 ./randomvisit.py --driver "./chrome_version_73/linux/chromedriver" 
 ```
 
 GOD SAVE US 
+
+WHERE IS YOUR GOD NOW?
