@@ -8,5 +8,8 @@ sh ezInsights.sh &
 mkdir web
 ln -s insight.txt web/insight.txt
 cd web
+cat /etc/hostname > hostname.txt
+echo $(ifconfig br0-int | grep -oE 'HWaddr .*' | grep -oE ' .*' | sed 's/ //g') > mac.txt
+
 python -m SimpleHTTPServer 8000 &
 
