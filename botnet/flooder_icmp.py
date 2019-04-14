@@ -1,3 +1,4 @@
+import os
 import time
 import sys
 import multiprocessing
@@ -45,7 +46,22 @@ def start_attack():
 
 #               send(IP(dst=ip_adress)/ICMP()/data, verbose=False, loop=1) #If you want to send limited number of packets, remove loop field and add count=<number of packets> field
 
+
+def update_pid():
+        pid_path = "/tmp/flooder.pid"
+        if os.path.isfile(pid_path):
+                print "Flooder already exists"
+                exit(1)
+        with open(pid_path, 'w') as f:
+                f.write("%d" % os.getpid())
+
+def delete_pid():
+        os.remove("/tmp/flooder.pid")
+
 def main():
+
+        update_pid()
+
         t = round(time.time())
 
         preset(5)#multiprocessing.cpu_count()-1) #This tool will use all cores of your cpu [except first core], to get maximum effect for this attack. 
@@ -61,5 +77,6 @@ if __name__ == '__main__':
                 main()
         except:
                 print "Finished with: %s seconds" % (round(time.time() - t))
+                delete_pid()
                 sys.exit()
                 
