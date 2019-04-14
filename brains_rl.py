@@ -98,9 +98,17 @@ def reward():
 			score += w
 			if score > 0:
                 print "Success! score: ", score
+				restart_net()
             else:
                 print "Fail! score: ", score
+				restart_net()
 
+def restart_net(): 
+	#restarts state 
+	curr_VN_h1=api_VN("h1") 
+	if init_VN_h1 != curr_VN_h1: toggle("h1") 
+	if init_VN_h2 != curr_VN_h2: toggle("h2") 
+	
 def do_action(action):
     s = state #World.player
     r = -score #-World.score
