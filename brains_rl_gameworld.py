@@ -1,4 +1,3 @@
-__author__ = 'philippe'
 from Tkinter import *
 master = Tk()
 
