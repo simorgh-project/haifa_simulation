@@ -1,3 +1,4 @@
+#import World
 import threading
 import time
 
@@ -52,7 +53,7 @@ specials = [(0, 3, "bad", -1), # IDS--h1u--h2u, IPS--h1d--h2d ## BOTH ATTACKING 
 			(1, 3, "bad", -1), # IDS--h1u--h2d, IPS--h1d--h2d ## H1 ATTACKING IDS 
 			(1, 2, "bad", -1), # IDS--h1u--h2d, IPS--h1d--h2u ## H1 ATTACKING IDS & H2 ATTACKING IPS
 			(3, 0, "bad", -1), # IDS--h1d--h2d, IPS--h1u--h2u ## BOTH ATTACKING IPS 
-			(0, 0, "bad", -1), # IDS--h1u--h2u, IPS--h1u--h2u ## BOTH ATTACKING IDS & IPS  
+
 			
 			(2, 1, "good", 1), # IDS--h1d--h2u, IPS--h1u--h2d  ## H2 ATTACKING IDS & H1 ATTACKING IPS
 			(3, 1, "good", 1)] # IDS--h1d--h2d, IPS--h1u--h2d  ## H1 ATTACKING IPS 
@@ -61,10 +62,11 @@ specials = [(0, 3, "bad", -1), # IDS--h1u--h2u, IPS--h1d--h2d ## BOTH ATTACKING 
 Q = {}
 discount = 0.3
 actions = ["toggle_h1","toggle_h2", "nothing"] #World.actions
-states = []
-for i in range(4):#World.x):
-    for j in range(4):#(World.y):
-        states.append((i, j)) #create a list of all possible states 
+states = [(0,3),(1,2),(1,3),(2,1),(2,3),(3,0),(3,1),(3,2),(3,3)]
+#for i in range(4):#World.x):
+#    for j in range(4):#(World.y):
+#        if (makessense(i,j)):
+#			states.append((i, j)) #create a list of all possible states 
 
 for state in states:
     temp = {}
