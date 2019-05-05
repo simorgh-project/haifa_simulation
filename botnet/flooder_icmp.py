@@ -16,7 +16,7 @@ def preset(cpu_number): #This method is responsible for starting multiprocessing
                 processes[i].join()
 
 def start_attack():
-        ip_adress = "8.8.8.8"
+        ip_adress = "9.9.9.9"
         data = "X"*500 #Change 900 to adjust value of bytes in ICMP data field. 1440 bytes maximum.
         if len(sys.argv) < 2:
                 print "Please give a target"
@@ -64,7 +64,7 @@ def main():
 
         t = round(time.time())
 
-        preset(5)#multiprocessing.cpu_count()-1) #This tool will use all cores of your cpu [except first core], to get maximum effect for this attack. 
+        preset(2)#multiprocessing.cpu_count()-1) #This tool will use all cores of your cpu [except first core], to get maximum effect for this attack. 
 
         print "Finished with: %s seconds" % (round(time.time() - t))
         sys.exit()
