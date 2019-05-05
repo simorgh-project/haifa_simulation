@@ -14,3 +14,8 @@ Benign host ( collects QOS data)
 ```
 sudo sh QOS/main.sh & 
 ```
+
+for ssh behind gateway 
+```
+ssh -i '~/.ssh/gw' 10.142.15.239
+```
