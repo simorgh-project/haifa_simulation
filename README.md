@@ -10,10 +10,16 @@ sudo python3 ./randomvisit.py --driver "./chrome_version_73/linux/chromedriver" 
 
 
 for RBC project 
-Benign host ( collects QOS data) 
+Benign host ( collects QOS data - visits 8.8.8.8) 
 ```
 sudo sh QOS/main.sh & 
 ```
+
+Malicious Host ( collects attack stats - attacks 9.9.9.9) 
+```
+sh run.sh 9.9.9.9 &
+```
+
 
 for ssh behind gateway 
 ```
