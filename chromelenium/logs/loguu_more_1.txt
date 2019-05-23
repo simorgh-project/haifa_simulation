@@ -1,0 +1,121 @@
+Google.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Google.comurl=_pcap_1559496425.pcap
+https://policies.google.com/terms?hl=en&gl=us
+START
+back
+done with sniff
+STOP
+https://policies.google.com/terms?hl=en&gl=us
+https://policies.google.com/terms?hl=en&gl=us
+done = ./pcaps/Google.comurl=licies.go_pcap_1559496425.pcap
+thats a wrap
+reset packets
+Youtube.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Youtube.comurl=_pcap_1572551746.pcap
+https://accounts.google.com/ServiceLogin?uilel=3&hl=en&service=youtube&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Fhl%3Den%26app%3Ddesktop%26next%3D%252Faccount%26action_handle_signin%3Dtrue%26feature%3Dredirect_login
+START
+back
+done with sniff
+STOP
+https://accounts.google.com/ServiceLogin?uilel=3&hl=en&service=youtube&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Fhl%3Den%26app%3Ddesktop%26next%3D%252Faccount%26action_handle_signin%3Dtrue%26feature%3Dredirect_login
+https://accounts.google.com/ServiceLogin?uilel=3&hl=en&service=youtube&passive=true&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Fhl%3Den%26app%3Ddesktop%26next%3D%252Faccount%26action_handle_signin%3Dtrue%26feature%3Dredirect_login
+done = ./pcaps/Youtube.comurl=counts.go_pcap_1572551746.pcap
+thats a wrap
+reset packets
+Facebook.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Facebook.comurl=_pcap_1583611015.pcap
+https://ko-kr.facebook.com/
+START
+back
+done with sniff
+STOP
+https://ko-kr.facebook.com/
+https://ko-kr.facebook.com/
+done = ./pcaps/Facebook.comurl=-kr.faceb_pcap_1583611015.pcap
+thats a wrap
+reset packets
+Baidu.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Baidu.comurl=_pcap_1618466709.pcap
+http://baidu.com/
+START
+back
+done with sniff
+STOP
+http://baidu.com/
+http://baidu.com/
+Process Process-11:
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/multiprocessing/process.py", line 254, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.4/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "./randomvisit.py", line 35, in start_capture
+    stop_capture(u)
+  File "./randomvisit.py", line 46, in stop_capture
+    wrpcap(pname, pkts)
+  File "/usr/local/lib/python3.4/dist-packages/scapy/utils.py", line 819, in wrpcap
+    with PcapWriter(filename, *args, **kargs) as fdesc:
+  File "/usr/local/lib/python3.4/dist-packages/scapy/utils.py", line 1225, in __init__
+    self.f = [open, gzip.open][gz](filename, append and "ab" or "wb", gz and 9 or bufsz)  # noqa: E501
+FileNotFoundError: [Errno 2] No such file or directory: './pcaps/Baidu.comurl=du.com/_pcap_1618466709.pcap'
+thats a wrap
+reset packets
+Wikipedia.org
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Wikipedia.orgurl=_pcap_1598134986.pcap
+https://to.wikipedia.org/wiki/Peesi_tali_fiefia
+START
+back
+done with sniff
+STOP
+https://to.wikipedia.org/wiki/Peesi_tali_fiefia
+https://to.wikipedia.org/wiki/Peesi_tali_fiefia
+done = ./pcaps/Wikipedia.orgurl=.wikipedi_pcap_1598134986.pcap
+thats a wrap
+reset packets
+Qq.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Qq.comurl=_pcap_1694231286.pcap
+Traceback (most recent call last):
+  File "./randomvisit.py", line 123, in <module>
+    random_visit(url)
+  File "./randomvisit.py", line 95, in random_visit
+    driver.get(random.choice(next_urls))
+  File "/usr/local/lib/python3.4/dist-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+    self.execute(Command.GET, {'url': url})
+  File "/usr/local/lib/python3.4/dist-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python3.4/dist-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: unsupported protocol
+  (Session info: headless chrome=74.0.3729.131)
+  (Driver info: chromedriver=74.0.3729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Linux 4.4.0-148-generic x86_64)
+

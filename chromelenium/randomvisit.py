@@ -23,14 +23,14 @@ def read_urls(file_path):
 
 
 def makecap(x):
-    print ("MAKEE")
+   # print ("MAKEE")
     global pkts
     pkts.append(x)
     #print (str(x))
 
 def start_capture(u):
     print ("START")
-    sniff(prn=makecap, timeout=5)
+    sniff(prn=makecap, timeout=20)
     print ("done with sniff")
     stop_capture(u)
 
@@ -58,38 +58,40 @@ def random_visit(_url):
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--ssl-key-log-file=./ssl/" + _url + "_ssl_" + str(timestamp))
     driver = webdriver.Chrome(args.driver, options=chrome_options)
-    # driver.maximize_window()
     driver.implicitly_wait(5)
-
     for count in range(10):
         if count == 0:
-            driver.get("http://" + _url)
+                t1= Process(target=start_capture, args=(str(driver.current_url),))
+                t1.start() 
+                time.sleep(2)
+                driver.get("http://" + _url)
+                time.sleep(5)
+                t1.join()
         else:
             print(driver.current_url)
 
             t1 = Process(target=start_capture, args=(str(driver.current_url),))
-
+            t1.start() 
+            time.sleep(10)
             t2 = Process(target=driver.get,args=(driver.current_url,))
             t2.start()
-            t1.start()
 
-            #start_capture()
-            #driver.get(driver.current_url)
             print ("back")
-            #time.sleep(2)
-            t2.join()
+            time.sleep(2)
             t1.join()
+            t2.join()
             print ("thats a wrap")
+            break 
 
         next_urls = []
 
         for link in driver.find_elements_by_xpath("//*[@href]"):
             hyperlink = link.get_attribute('href')
             next_urls.append(hyperlink)
+            print(hyperlink) 
 
         if len(next_urls) == 0:
             continue
-
         driver.get(random.choice(next_urls))
 
     driver.quit()
@@ -116,7 +118,7 @@ if __name__ == "__main__":
     # Visit urls from the input file
     urls = read_urls(args.file)
     for url in urls:
-        timestamp = int(time.time())
+        timestamp = random.randint(1,145678901) + int(time.time())
         print(url)
         random_visit(url)
         rst_pkts()

@@ -1,0 +1,73 @@
+Google.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Google.comurl=_pcap_1597021860.pcap
+https://www.google.com/webhp?tab=ww
+START
+back
+done with sniff
+STOP
+https://www.google.com/webhp?tab=ww
+https://www.google.com/webhp?tab=ww
+done = ./pcaps/Google.comurl=w.google._pcap_1597021860.pcap
+thats a wrap
+reset packets
+Youtube.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Youtube.comurl=_pcap_1573038744.pcap
+https://www.youtube.com/yt/about/press/
+START
+back
+done with sniff
+STOP
+https://www.youtube.com/yt/about/press/
+https://www.youtube.com/yt/about/press/
+done = ./pcaps/Youtube.comurl=w.youtube_pcap_1573038744.pcap
+thats a wrap
+reset packets
+Facebook.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Facebook.comurl=_pcap_1599334126.pcap
+https://hi-in.facebook.com/
+START
+back
+done with sniff
+STOP
+https://hi-in.facebook.com/
+https://hi-in.facebook.com/
+done = ./pcaps/Facebook.comurl=-in.faceb_pcap_1599334126.pcap
+thats a wrap
+reset packets
+Baidu.com
+START
+done with sniff
+STOP
+data:,
+data:,
+done = ./pcaps/Baidu.comurl=_pcap_1639909200.pcap
+Traceback (most recent call last):
+  File "./randomvisit.py", line 123, in <module>
+    random_visit(url)
+  File "./randomvisit.py", line 95, in random_visit
+    driver.get(random.choice(next_urls))
+  File "/usr/local/lib/python3.4/dist-packages/selenium/webdriver/remote/webdriver.py", line 333, in get
+    self.execute(Command.GET, {'url': url})
+  File "/usr/local/lib/python3.4/dist-packages/selenium/webdriver/remote/webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "/usr/local/lib/python3.4/dist-packages/selenium/webdriver/remote/errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: unsupported protocol
+  (Session info: headless chrome=74.0.3729.131)
+  (Driver info: chromedriver=74.0.3729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Linux 4.4.0-148-generic x86_64)
+
