@@ -1,0 +1,1 @@
+15 0 * * * bash /home/shaalabaz/NEW_HAIFA/haifa_simulation/chromelenium/start_benign.sh >> /home/shaalabaz/NEW_HAIFA/haifa_simulation/chromelenium/cronlog 2>&1
