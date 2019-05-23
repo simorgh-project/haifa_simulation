@@ -43,8 +43,6 @@ sudo apt-get install google-chrome-stable
 ```
 new machine runs web agent 
 ```
-apt install git 
-Y
 apt install python3-pip 
 Y
 pip3 install --upgrade pip
@@ -54,8 +52,13 @@ pip3 install --upgrade --ignore-installed urllib3
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 sudo apt-get update 
-sudo apt-get install google-chrome-stable
 mkdir NEW_HAIFA
 cd NEW_HAIFA
+
+apt install git 
+Y
+sudo apt-get install google-chrome-stable
+Y
+
 git clone https://github.com/haifa-foundation/haifa_simulation.git
 ```
