@@ -25,9 +25,9 @@ do
 for ((i=0;i<$process_no;i++))
 do
 file=urls-$j.txt
-nohup python3 -u ./randomvisit.py --driver $webdriver --file $file >> logs/loguu_more_$i.txt 2>&1 &
-sleep 200 
+nohup python3 -u ./randomvisit.py --driver $webdriver --file $file >> logs/loguu_more_$j_$i.txt 2>&1 &
+sleep 2 
 done 
-sleep 500000
+sleep 500
 done 
 

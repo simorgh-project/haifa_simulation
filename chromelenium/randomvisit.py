@@ -39,7 +39,7 @@ def stop_capture(u):
     print ("STOP")
     iter = 500
     if iter == 500:
-        print (u)
+        #print (u)
         re.sub('[^A-Za-z0-9]+','',u)
         print (u)
         pname = "./pcaps/" + str(url) + "url=" + u[10:19] + "_pcap_%d.pcap" % timestamp
@@ -87,8 +87,9 @@ def random_visit(_url):
 
         for link in driver.find_elements_by_xpath("//*[@href]"):
             hyperlink = link.get_attribute('href')
-            next_urls.append(hyperlink)
-            print(hyperlink) 
+            if hyperlink.startswith("http") == 1: 
+                next_urls.append(hyperlink)
+                print(hyperlink) 
 
         if len(next_urls) == 0:
             continue

@@ -25,7 +25,7 @@ do
 for ((i=0;i<$process_no;i++))
 do
 file=part_$j.txt
-nohup python3 -u ./randomvisit.py --driver $webdriver --file $file >> logs/loguu_$i.txt 2>&1 &
+nohup python3 -u ./randomvisit.py --driver $webdriver --file $file >> logs/loguu_$j_$i.txt 2>&1 &
 sleep 10 
 done 
 sleep 500
