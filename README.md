@@ -41,3 +41,14 @@ echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sud
 sudo apt-get update 
 sudo apt-get install google-chrome-stable
 ```
+new machine runs web agent 
+```
+apt install git 
+apt install python3-pip 
+pip3 install selenium 
+pip3 install scapy 
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt-get update 
+sudo apt-get install google-chrome-stable
+```
