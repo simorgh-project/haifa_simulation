@@ -1,7 +1,7 @@
 #!/bin/bash
 # get the url lists
 input=urls.txt
-process_no=100
+process_no=20
 webdriver=./chromedriver
 
 echo "Your input file:" $input
