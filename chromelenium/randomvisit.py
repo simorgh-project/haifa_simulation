@@ -40,9 +40,11 @@ def stop_capture(u):
     iter = 500
     if iter == 500:
         #print (u)
-        re.sub('[^A-Za-z0-9]+','',u)
+        u=re.sub('[^A-Za-z0-9]+','',u)
+        print("here is u = ==== " + u) 
+        u=re.sub('\\\\','',u)
         print (u)
-        pname = "./pcaps/" + str(url) + "url=" + u[10:19] + "_pcap_%d.pcap" % timestamp
+        pname = "./pcaps/" + str(url) + "url=" + u[-8:] + "_pcap_%d.pcap" % timestamp
         wrpcap(pname, pkts)
         print ("done = " + str(pname))
 
@@ -93,7 +95,9 @@ def random_visit(_url):
 
         if len(next_urls) == 0:
             continue
-        driver.get(random.choice(next_urls))
+        x= random.choice(next_urls) 
+        print (x) 
+        driver.get(x)
 
     driver.quit()
 
