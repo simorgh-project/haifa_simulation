@@ -42,7 +42,7 @@ def stop_capture(u):
         print (u)
         re.sub('[^A-Za-z0-9]+','',u)
         print (u)
-        pname = "./fml/" + str(url) + "url=" + u[10:19] + "_pcap_%d.pcap" % timestamp
+        pname = "./pcap/" + str(url) + "url=" + u[10:19] + "_pcap_%d.pcap" % timestamp
         wrpcap(pname, pkts)
         print ("done = " + str(pname))
 
@@ -56,9 +56,8 @@ def random_visit(_url):
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--window-size=1920,1080")
-    chrome_options.add_argument("--ssl-key-log-file=./fml/" + _url + "_ssl_" + str(timestamp))
+    chrome_options.add_argument("--ssl-key-log-file=./ssl/" + _url + "_ssl_" + str(timestamp))
     driver = webdriver.Chrome(args.driver, options=chrome_options)
-    # driver.maximize_window()
     driver.implicitly_wait(5)
     for count in range(10):
         if count == 0:
@@ -75,11 +74,8 @@ def random_visit(_url):
             t1.start() 
             time.sleep(10)
             t2 = Process(target=driver.get,args=(driver.current_url,))
-#            t1.start() 
             t2.start()
 
-            #start_capture()
-            #driver.get(driver.current_url)
             print ("back")
             time.sleep(2)
             t1.join()
@@ -93,10 +89,10 @@ def random_visit(_url):
             hyperlink = link.get_attribute('href')
             next_urls.append(hyperlink)
 
-#        if len(next_urls) == 0:
-            #break #continue
+        if len(next_urls) == 0:
+            continue
 
-#        driver.get(random.choice(next_urls))
+        driver.get(random.choice(next_urls))
 
     driver.quit()
 
@@ -122,7 +118,7 @@ if __name__ == "__main__":
     # Visit urls from the input file
     urls = read_urls(args.file)
     for url in urls:
-        timestamp = int(time.time())
+        timestamp = random.randint(1,145678901) + int(time.time())
         print(url)
         random_visit(url)
         rst_pkts()
