@@ -24,13 +24,13 @@ sudo sh QOS/main.sh &
 
 Malicious Host ( collects attack stats - attacks 9.9.9.9) 
 ```
-sh run.sh 9.9.9.9 &
+sh botnet/run.sh 9.9.9.9 &
 ```
 
 
 for ssh behind gateway 
 ```
-ssh -i '~/.ssh/gw' 10.142.15.239
+ssh -i '~/.ssh/gw' 210.0.0.101
 ```
 
 
