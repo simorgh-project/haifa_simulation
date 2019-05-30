@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
-port_num=${1+x}||8000
+# get current file directory
+DIR="$(realpath $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd ))"
+cd $DIR
 
-python -m SimpleHTTPServer $port_num
+# parse input port
+port_num=8000
+[[ -z ${1+x} ]] || port_num="$1"
+
+cd $DIR/web
+python -m SimpleHTTPServer ${port_num}
