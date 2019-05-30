@@ -60,5 +60,5 @@ cat /etc/hostname > web/hostname.txt
 echo $(ifconfig br0-int | grep -oE 'HWaddr .*' | grep -oE ' .*' | sed 's/ //g') > web/mac.txt
 
 # run HTTP server
-screen -d -S haifa-webserver -m sh imServer.sh
+screen -d -S haifa-webserver -m bash imServer.sh
 
