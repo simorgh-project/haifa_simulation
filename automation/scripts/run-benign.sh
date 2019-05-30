@@ -28,9 +28,38 @@ rm -rf haifa_simulation/
 git clone https://github.com/haifa-foundation/haifa_simulation.git
 cd haifa_simulation/
 
-# run QoS code in screen
 # python3 ./randomvisit.py --driver "./chromedriver" --file "urls.txt"
 
+# ========================================================
+
+# run ezQOS script
+screen -d -m sh QOS/ezQOS.sh 8.8.8.8
+
+# make insight files
+touch QOSlog.txt
+touch insight.txt
+
+# sleep for some reason Ezz knows
+sleep 2s
+
+# run ezInsights
+screen -d -m sh QOS/ezInsights.sh 8.8.8.8
+
+# run QoS code in screen
 echo "Running QoS script in screen"
 screen -d -m sh QOS/main.sh
+
+# run web-server directory
+mkdir -p web
+
+# link insight file
+test -f web/insight.txt || test -L web/insight.txt || ln -s insight.txt web/insight.txt
+cd web
+
+# add hostname and mac
+cat /etc/hostname > hostname.txt
+echo $(ifconfig br0-int | grep -oE 'HWaddr .*' | grep -oE ' .*' | sed 's/ //g') > mac.txt
+
+# run HTTP server
+screen -d -m sh QOS/imServer.sh 8.8.8.8
 
