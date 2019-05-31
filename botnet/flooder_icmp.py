@@ -35,16 +35,16 @@ class Timer:
 def preset(cpu_number):
     """
     This method is responsible for starting multiprocessing
-    processes.
+    threads.
     """
-    target = sys.argv[1] if len(sys.argv) >= 2 else "4.2.2.4"
-    processes = [Process(target=start_attack, args=(target,)) for _ in range(cpu_number)]
+    target_ip = sys.argv[1] if len(sys.argv) >= 2 else "4.2.2.4"
+    threads = [Thread(target=start_attack, args=(target_ip,)) for _ in range(cpu_number)]
 
     for i in range(cpu_number):
-        processes[i].start()
+        threads[i].start()
 
     for i in range(cpu_number):
-        processes[i].join()
+        threads[i].join()
 
 
 def start_attack(target_ip):

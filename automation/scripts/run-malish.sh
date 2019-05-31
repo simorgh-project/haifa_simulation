@@ -28,7 +28,7 @@ cd botnet/
 
 # run flooder
 echo "Running flooder"
-screen -d -S "haifa-flooder" -m python flooder_icmp.py "4.2.2.4"
+screen -d -S "haifa-flooder" -m sudo $(which python) flooder_icmp.py "4.2.2.4"
 
 # create serve dir
 mkdir -p web
@@ -41,5 +41,5 @@ echo "Sleeping for some reason Ezz knows"
 sleep 5
 
 echo "Running web-server"
-screen -d -S "haifa-flood-webserver" -m bash -c "python -m SimpleHTTPServer 8001"
+screen -d -S "haifa-flood-webserver" -m bash -c "python3 -m http.server 8001"
 
