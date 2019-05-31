@@ -37,9 +37,6 @@ cd web
 cat /etc/hostname > hostname.txt
 echo $(ifconfig br0-int | grep -oE 'HWaddr .*' | grep -oE ' .*' | sed 's/ //g') > mac.txt
 
-echo "Sleeping for some reason Ezz knows"
-sleep 5
-
 echo "Running web-server"
 screen -d -S "haifa-flood-webserver" -m bash -c "python3 -m http.server 8001"
 
