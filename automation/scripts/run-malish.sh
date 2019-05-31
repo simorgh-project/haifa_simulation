@@ -19,7 +19,6 @@ git clone https://github.com/haifa-foundation/haifa_simulation.git
 # ========================================================
 
 set -e
-set -x
 
 cd haifa_simulation/
 
@@ -29,7 +28,7 @@ cd botnet/
 
 # run flooder
 echo "Running flooder"
-screen -d -S "haifa-flooder" -m python flooder_icmp.py "$@"
+screen -d -S "haifa-flooder" -m python flooder_icmp.py "4.2.2.4"
 
 # create serve dir
 mkdir -p web

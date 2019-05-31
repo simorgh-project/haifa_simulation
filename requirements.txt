@@ -10,6 +10,7 @@ pkg-resources==0.0.0
 prompt-toolkit==2.0.9
 ptyprocess==0.6.0
 Pygments==2.4.2
+scapy==2.4.2
 six==1.12.0
 traitlets==4.3.2
 wcwidth==0.1.7
