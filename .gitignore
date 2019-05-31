@@ -7,3 +7,4 @@ Restful/target
 *.DS_Store
 *.iml
 chromelenium/urls.txt
+/env

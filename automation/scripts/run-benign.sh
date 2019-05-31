@@ -53,7 +53,8 @@ screen -d -S haifa-insights -m sh ezInsights.sh
 mkdir -p web
 
 # link insight file
-test -f web/insight.txt || test -L web/insight.txt || ln -s insight.txt web/insight.txt
+rm -f web/insight.txt
+ln -s $(realpath insight.txt) web/insight.txt
 
 # add hostname and mac
 cat /etc/hostname > web/hostname.txt
